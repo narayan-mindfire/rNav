@@ -11,6 +11,7 @@ const HomePage = ({ navigation }: HomeScreenProps) => {
           navigation.navigate("Explore", {
             message: "hello this is a message I'm passing via props",
             times: 1,
+            headerName: "Explore",
           })
         }
       >

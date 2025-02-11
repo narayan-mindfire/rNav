@@ -16,6 +16,7 @@ const ExplorePage = ({ navigation, route }: ExploreScreenProps) => {
             message:
               "this message says that you've reached explore page from another explore page in the screen stack",
             times: route.params.times + 1,
+            headerName: "Explore" + JSON.stringify(route.params.times + 1),
           })
         }
       >

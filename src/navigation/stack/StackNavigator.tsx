@@ -18,7 +18,13 @@ function RootStack() {
       }}
     >
       <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="Explore" component={Explore} />
+      <Stack.Screen
+        name="Explore"
+        component={Explore}
+        options={({ route }) => ({
+          title: route.params.headerName,
+        })}
+      />
     </Stack.Navigator>
   );
 }
