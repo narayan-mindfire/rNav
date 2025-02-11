@@ -1,10 +1,11 @@
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "../../screens/HomePage";
 import Explore from "../../screens/ExplorePage";
 import { RootStackParamList } from "./NavigationTypes";
+import Icon from "react-native-vector-icons/MaterialIcons";
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootStack() {
@@ -21,8 +22,13 @@ function RootStack() {
       <Stack.Screen
         name="Explore"
         component={Explore}
-        options={({ route }) => ({
+        options={({ route, navigation }) => ({
           title: route.params.headerName,
+          headerRight: () => (
+            <TouchableOpacity onPress={() => navigation.popToTop()}>
+              <Icon name="home" size={30} color="#fff" />
+            </TouchableOpacity>
+          ),
         })}
       />
     </Stack.Navigator>

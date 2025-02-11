@@ -1,10 +1,19 @@
-import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import React, { useState } from "react";
+import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { HomeScreenProps } from "../navigation/stack/NavigationTypes";
 const HomePage = ({ navigation }: HomeScreenProps) => {
+  const [count, setCount] = useState(0);
+  navigation.setOptions({
+    headerRight: () => (
+      <TouchableOpacity onPress={() => setCount((count: number) => count + 1)}>
+        <Text>Update count</Text>
+      </TouchableOpacity>
+    ),
+  });
   return (
     <View style={{ justifyContent: "center", flex: 1, alignItems: "center" }}>
       <Text>HomePage</Text>
+      <Text style={{ margin: 30 }}>count : {count}</Text>
       <TouchableOpacity
         style={styles.btn}
         onPress={() =>
