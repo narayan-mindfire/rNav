@@ -4,12 +4,7 @@ import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "../../screens/HomePage";
 import Explore from "../../screens/ExplorePage";
-
-type RootStackParamList = {
-  Home: undefined;
-  Explore: { message: String; times: number };
-};
-
+import { RootStackParamList } from "./NavigationTypes";
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootStack() {
