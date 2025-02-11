@@ -1,7 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React from "react";
+import React, { FC } from "react";
 import { ExploreScreenProps } from "../navigation/stack/NavigationTypes";
-const ExplorePage = ({ navigation, route }: ExploreScreenProps) => {
+const ExplorePage: FC<ExploreScreenProps> = ({ navigation, route }) => {
   return (
     <View style={{ justifyContent: "center", alignItems: "center", flex: 1 }}>
       <Text>ExplorePage</Text>

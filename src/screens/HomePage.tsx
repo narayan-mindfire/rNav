@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { HomeScreenProps } from "../navigation/stack/NavigationTypes";
-const HomePage = ({ navigation }: HomeScreenProps) => {
+const HomePage: FC<HomeScreenProps> = ({ navigation }) => {
   const [count, setCount] = useState(0);
   navigation.setOptions({
     headerRight: () => (
