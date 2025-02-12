@@ -4,7 +4,7 @@ import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "../../screens/HomePage";
 import Explore from "../../screens/ExplorePage";
-import { RootStackParamList } from "./NavigationTypes";
+import { RootStackParamList } from "../../types/NavigationTypes";
 import Icon from "react-native-vector-icons/MaterialIcons";
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -26,7 +26,7 @@ function RootStack() {
           title: route.params.headerName,
           headerRight: () => (
             <TouchableOpacity onPress={() => navigation.popToTop()}>
-              <Icon name="home" size={30} color="#fff" />
+              <Icon name="home" size={30} color="#000" />
             </TouchableOpacity>
           ),
         })}
@@ -36,11 +36,7 @@ function RootStack() {
 }
 
 const StackNavigator = () => {
-  return (
-    <NavigationContainer>
-      <RootStack />
-    </NavigationContainer>
-  );
+  return <RootStack />;
 };
 
 export default StackNavigator;

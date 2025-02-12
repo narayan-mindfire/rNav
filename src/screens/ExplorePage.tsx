@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { FC } from "react";
-import { ExploreScreenProps } from "../navigation/stack/NavigationTypes";
+import { ExploreScreenProps } from "../types/NavigationTypes";
 const ExplorePage: FC<ExploreScreenProps> = ({ navigation, route }) => {
   return (
     <View style={{ justifyContent: "center", alignItems: "center", flex: 1 }}>
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     height: 40,
     width: 100,
     borderRadius: 20,
-    backgroundColor: "gray",
+    backgroundColor: "#000",
     justifyContent: "center",
     alignItems: "center",
     margin: 5,
