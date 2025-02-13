@@ -1,6 +1,5 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import RootStack from "./stack/StackNavigator";
-import { FC } from "react";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import WorkTopTab from "./WorkTopTab";
 import SettingPage from "../screens/SettingPage";

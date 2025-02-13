@@ -40,7 +40,7 @@ const HomePage: FC<HomeScreenProps> = ({ navigation }) => {
       <TouchableOpacity
         style={styles.btn}
         onPress={() => {
-          navigation.getParent()?.navigate("work", { screen: "doing" });
+          navigation.getParent()?.navigate("Work", { screen: "Doing" });
         }}
       >
         <Text style={styles.btntxt}>doing Page</Text>

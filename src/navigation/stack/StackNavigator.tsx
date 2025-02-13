@@ -1,7 +1,7 @@
 import { TouchableOpacity } from "react-native";
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Home from "../../screens/HomePage";
+import HomePage from "../../screens/HomePage";
 import Explore from "../../screens/ExplorePage";
 import { StackNavigatorParamList } from "../../types/NavigationTypes";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -17,7 +17,7 @@ function StackNavigator() {
         statusBarBackgroundColor: "gray",
       }}
     >
-      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="HomePage" component={HomePage} />
       <Stack.Screen
         name="Explore"
         component={Explore}
