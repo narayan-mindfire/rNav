@@ -11,12 +11,12 @@ const HomePage: FC<HomeScreenProps> = ({ navigation }) => {
           onPress={() => setCount((count: number) => count + 1)}
           style={styles.btn}
         >
-          <Text style={{ color: "#fff" }}>Update count</Text>
+          <Text style={styles.btntxt}>Update count</Text>
         </TouchableOpacity>
       ),
       headerLeft: () => (
         <TouchableOpacity onPress={() => setCount(0)} style={styles.btn}>
-          <Text style={{ color: "#fff" }}>reset count</Text>
+          <Text style={styles.btntxt}>reset count</Text>
         </TouchableOpacity>
       ),
     });
@@ -35,7 +35,15 @@ const HomePage: FC<HomeScreenProps> = ({ navigation }) => {
           })
         }
       >
-        <Text style={{ color: "#fff" }}>explore</Text>
+        <Text style={styles.btntxt}>explore</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.btn}
+        onPress={() => {
+          navigation.getParent()?.navigate("work", { screen: "doing" });
+        }}
+      >
+        <Text style={styles.btntxt}>doing Page</Text>
       </TouchableOpacity>
     </View>
   );
@@ -46,10 +54,14 @@ const styles = StyleSheet.create({
     height: 40,
     width: 100,
     borderRadius: 20,
-    backgroundColor: "black",
+    backgroundColor: "gray",
     justifyContent: "center",
     alignItems: "center",
-    margin: 5,
+    marginTop: 20,
+  },
+  btntxt: {
+    color: "#fff",
+    fontWeight: "bold",
   },
 });
 export default HomePage;

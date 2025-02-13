@@ -1,22 +1,37 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { NavigatorScreenParams } from "@react-navigation/native";
-export type RootStackParamList = {
-  // HomeTabs: undefined;
+import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
+export type StackNavigatorParamList = {
   Home: undefined;
-  Explore: { message: String; times: number; headerName: string };
+  Explore: { message: string; times: number; headerName: string };
 };
 
 export type HomeScreenProps = NativeStackScreenProps<
-  RootStackParamList,
+  StackNavigatorParamList,
   "Home"
 >;
 export type ExploreScreenProps = NativeStackScreenProps<
-  RootStackParamList,
+  StackNavigatorParamList,
   "Explore"
 >;
 
 export type TabNavigationParamList = {
-  Stack: NavigatorScreenParams<RootStackParamList>;
+  Home: NavigatorScreenParams<StackNavigatorParamList>;
   Work: undefined;
   Settings: undefined;
 };
+
+export type RootStackParamList = {
+  Welcome: undefined;
+  Tab: NavigatorScreenParams<TabNavigationParamList>;
+  Profile: undefined;
+};
+
+export type WelcomeScreenProps = NativeStackScreenProps<
+  RootStackParamList,
+  "Welcome"
+>;
+export type SettingPageScreenProps = BottomTabScreenProps<
+  TabNavigationParamList,
+  "Settings"
+>;

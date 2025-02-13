@@ -1,14 +1,13 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 import React from "react";
-import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "../../screens/HomePage";
 import Explore from "../../screens/ExplorePage";
-import { RootStackParamList } from "../../types/NavigationTypes";
+import { StackNavigatorParamList } from "../../types/NavigationTypes";
 import Icon from "react-native-vector-icons/MaterialIcons";
-const Stack = createNativeStackNavigator<RootStackParamList>();
+const Stack = createNativeStackNavigator<StackNavigatorParamList>();
 
-function RootStack() {
+function StackNavigator() {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -34,9 +33,5 @@ function RootStack() {
     </Stack.Navigator>
   );
 }
-
-const StackNavigator = () => {
-  return <RootStack />;
-};
 
 export default StackNavigator;

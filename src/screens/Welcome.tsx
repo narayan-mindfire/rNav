@@ -1,33 +1,42 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
-import { SettingPageScreenProps } from "../types/NavigationTypes";
 import { useNavigation } from "@react-navigation/native";
-
-const SettingPage = () => {
-  const navigation = useNavigation();
+import { WelcomeScreenProps } from "../types/NavigationTypes";
+const Welcome: React.FC<WelcomeScreenProps> = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text>SettingPage</Text>
+      <Text style={styles.headtxt}>welcome</Text>
       <TouchableOpacity
         style={styles.btn}
-        onPress={() => {
-          navigation.getParent()?.navigate("Profile");
-        }}
+        onPress={() =>
+          navigation.navigate("Tab", {
+            screen: "Home",
+            params: {
+              screen: "Home",
+              params: undefined,
+            },
+          })
+        }
       >
-        <Text style={styles.btntxt}>Visit Profile</Text>
+        <Text style={styles.btntxt}>lets go!</Text>
       </TouchableOpacity>
     </View>
   );
 };
 
-export default SettingPage;
+export default Welcome;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#000",
     justifyContent: "center",
     alignItems: "center",
-    // backgroundColor: "#000",
+  },
+  headtxt: {
+    fontSize: 48,
+    fontWeight: "bold",
+    color: "#fff",
   },
   btn: {
     height: 40,
