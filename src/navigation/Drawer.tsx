@@ -5,28 +5,39 @@ import {
   DrawerItem,
   DrawerItemList,
 } from "@react-navigation/drawer";
-import { View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import TabNavigator from "./TabNavigator";
 import ProfilePage from "../screens/ProfilePage";
 import SettingPage from "../screens/SettingPage";
+import { Linking } from "react-native";
 
 const Drawer = createDrawerNavigator();
 
 function CustomDrawerContent(props: DrawerContentComponentProps) {
   return (
-    <DrawerContentScrollView
-      {...props}
-      contentContainerStyle={{ flex: 1, gap: 10 }}
-    >
-      <DrawerItemList {...props} />
-      <View style={{ flex: 1 }} />
-      <DrawerItem
-        style={{ backgroundColor: "white", borderRadius: 0 }}
-        label="LogOut"
-        labelStyle={{ color: "red", fontWeight: "bold" }}
-        onPress={() => props.navigation.getParent()?.navigate("Welcome")}
-      />
-    </DrawerContentScrollView>
+    <View style={styles.container}>
+      <DrawerContentScrollView
+        {...props}
+        contentContainerStyle={{ flex: 1, gap: 10 }}
+      >
+        <View style={styles.grpa}>
+          <DrawerItemList {...props} />
+        </View>
+        <View style={styles.grpb}>
+          <DrawerItem
+            style={{ backgroundColor: "white", borderRadius: 0 }}
+            label="LogOut"
+            labelStyle={{ color: "red", fontWeight: "bold" }}
+            onPress={() => props.navigation.getParent()?.navigate("Welcome")}
+          />
+          <DrawerItem
+            label="Help"
+            style={{ backgroundColor: "white", borderRadius: 0 }}
+            onPress={() => Linking.openURL("https://google.co.in")}
+          />
+        </View>
+      </DrawerContentScrollView>
+    </View>
   );
 }
 
@@ -65,3 +76,14 @@ function MyDrawer() {
 export default function DrawNav() {
   return <MyDrawer />;
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingVertical: 10,
+    flexDirection: "column",
+    justifyContent: "space-evenly",
+  },
+  grpa: { flexGrow: 1, gap: 5 },
+  grpb: { gap: 5 },
+});
