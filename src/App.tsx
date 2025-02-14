@@ -1,10 +1,10 @@
+// import "./gesture-handler";
 import * as React from "react";
 import RootStack from "./navigation/stack/RootStack";
-import { NavigationContainer } from "@react-navigation/native";
+import DrawNav from "./navigation/Drawer";
 export function App() {
   return (
-    <NavigationContainer>
-      <RootStack />;
-    </NavigationContainer>
+    // <DrawNav />
+    <RootStack Welcome={undefined} Draw={undefined} Profile={undefined} />
   );
 }

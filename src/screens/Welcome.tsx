@@ -8,15 +8,7 @@ const Welcome: React.FC<WelcomeScreenProps> = ({ navigation }) => {
       <Text style={styles.headtxt}>welcome</Text>
       <TouchableOpacity
         style={styles.btn}
-        onPress={() =>
-          navigation.navigate("Tab", {
-            screen: "Home",
-            params: {
-              screen: "Home",
-              params: undefined,
-            },
-          })
-        }
+        onPress={() => navigation.navigate("Draw")}
       >
         <Text style={styles.btntxt}>lets go!</Text>
       </TouchableOpacity>

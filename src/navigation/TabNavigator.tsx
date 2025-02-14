@@ -50,7 +50,7 @@ const TabNavigator = () => {
           ),
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Settings"
         component={SettingPage}
         options={{
@@ -59,7 +59,7 @@ const TabNavigator = () => {
             <Icon name="settings" size={30} color={focused ? "#000" : "#fff"} />
           ),
         }}
-      />
+      /> */}
     </Tab.Navigator>
   );
 };

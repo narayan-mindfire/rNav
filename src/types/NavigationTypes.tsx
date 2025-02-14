@@ -18,12 +18,12 @@ export type ExploreScreenProps = NativeStackScreenProps<
 export type TabNavigationParamList = {
   Home: NavigatorScreenParams<StackNavigatorParamList>;
   Work: undefined;
-  Settings: undefined;
+  // Settings: undefined;
 };
 
 export type RootStackParamList = {
   Welcome: undefined;
-  Tab: NavigatorScreenParams<TabNavigationParamList>;
+  Draw: undefined;
   Profile: undefined;
 };
 
@@ -31,7 +31,12 @@ export type WelcomeScreenProps = NativeStackScreenProps<
   RootStackParamList,
   "Welcome"
 >;
-export type SettingPageScreenProps = BottomTabScreenProps<
-  TabNavigationParamList,
-  "Settings"
+
+export type ProfileScreenProps = NativeStackScreenProps<
+  RootStackParamList,
+  "Profile"
 >;
+// export type SettingPageScreenProps = BottomTabScreenProps<
+//   TabNavigationParamList,
+//   "Settings"
+// >;
