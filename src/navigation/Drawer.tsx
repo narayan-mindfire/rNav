@@ -7,13 +7,15 @@ import {
 } from "@react-navigation/drawer";
 import { StyleSheet, View } from "react-native";
 import TabNavigator from "./TabNavigator";
-import ProfilePage from "../screens/ProfilePage";
 import SettingPage from "../screens/SettingPage";
 import { Linking } from "react-native";
+import { useContext } from "react";
+import AuthContext from "../context/authContext";
 
 const Drawer = createDrawerNavigator();
 
 function CustomDrawerContent(props: DrawerContentComponentProps) {
+  const auth = useContext(AuthContext);
   return (
     <View style={styles.container}>
       <DrawerContentScrollView
@@ -28,7 +30,7 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
             style={{ backgroundColor: "white", borderRadius: 0 }}
             label="LogOut"
             labelStyle={{ color: "red", fontWeight: "bold" }}
-            onPress={() => props.navigation.getParent()?.navigate("Welcome")}
+            onPress={() => auth?.signOut()}
           />
           <DrawerItem
             label="Help"

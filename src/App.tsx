@@ -1,10 +1,15 @@
 // import "./gesture-handler";
-import * as React from "react";
+import React, { useState } from "react";
 import RootStack from "./navigation/stack/RootStack";
 import DrawNav from "./navigation/Drawer";
+import { AuthProvider } from "./context/authContext";
+
 export function App() {
+  const [isAuth, setIsAuth] = useState(true);
   return (
     // <DrawNav />
-    <RootStack Welcome={undefined} Draw={undefined} Profile={undefined} />
+    <AuthProvider>
+      <RootStack Welcome={undefined} Draw={undefined} Profile={undefined} />
+    </AuthProvider>
   );
 }

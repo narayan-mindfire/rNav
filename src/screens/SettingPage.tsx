@@ -1,9 +1,11 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
+import { AuthContext } from "../context/authContext";
 
 const SettingPage = () => {
   const navigation = useNavigation();
+  const auth = useContext(AuthContext);
   return (
     <View style={styles.container}>
       <Text>SettingPage</Text>
@@ -14,6 +16,13 @@ const SettingPage = () => {
         }}
       >
         <Text style={styles.btntxt}>Visit Profile</Text>
+      </TouchableOpacity>
+      <Text>
+        The authentication status is :{" "}
+        {auth?.user ? JSON.stringify(true) : JSON.stringify(false)}
+      </Text>
+      <TouchableOpacity style={styles.btn} onPress={() => auth?.signOut()}>
+        <Text style={styles.btntxt}>Signout</Text>
       </TouchableOpacity>
     </View>
   );

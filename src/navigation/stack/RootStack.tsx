@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../types/NavigationTypes";
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -7,7 +7,9 @@ import TabNavigator from "../TabNavigator";
 import ProfilePage from "../../screens/ProfilePage";
 import { NavigationContainer } from "@react-navigation/native";
 import DrawNav from "../Drawer";
+import { AuthContext } from "../../context/authContext";
 const RootStack: React.FC<RootStackParamList> = () => {
+  const isAuthenticated = useContext(AuthContext);
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -16,9 +18,14 @@ const RootStack: React.FC<RootStackParamList> = () => {
           statusBarBackgroundColor: "gray",
         }}
       >
-        <Stack.Screen name="Welcome" component={Welcome} />
-        <Stack.Screen name="Draw" component={DrawNav} />
-        <Stack.Screen name="Profile" component={ProfilePage} />
+        {!isAuthenticated?.user ? (
+          <Stack.Screen name="Welcome" component={Welcome} />
+        ) : (
+          <>
+            <Stack.Screen name="Draw" component={DrawNav} />
+            <Stack.Screen name="Profile" component={ProfilePage} />
+          </>
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );

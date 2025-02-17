@@ -1,16 +1,14 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React from "react";
-import { useNavigation } from "@react-navigation/native";
+import React, { useContext } from "react";
 import { ProfileScreenProps } from "../types/NavigationTypes";
+import AuthContext from "../context/authContext";
 
 const ProfilePage: React.FC<ProfileScreenProps> = ({ navigation }) => {
+  const auth = useContext(AuthContext);
   return (
     <View style={styles.container}>
       <Text>ProfilePage</Text>
-      <TouchableOpacity
-        style={styles.btn}
-        onPress={() => navigation.popToTop()}
-      >
+      <TouchableOpacity style={styles.btn} onPress={() => auth?.signOut()}>
         <Text style={styles.btntxt}>Logout</Text>
       </TouchableOpacity>
     </View>
