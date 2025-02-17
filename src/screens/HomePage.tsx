@@ -1,10 +1,41 @@
 import React, { FC, useContext, useEffect, useState } from "react";
-import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  Alert,
+  BackHandler,
+  Button,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { HomeScreenProps } from "../types/NavigationTypes";
 import AuthContext from "../context/authContext";
 const HomePage: FC<HomeScreenProps> = ({ navigation }) => {
   const [count, setCount] = useState(0);
   const auth = useContext(AuthContext);
+  useEffect(() => {
+    const onBackPress = () => {
+      Alert.alert("Exit App", "Are you sure you want to exit the app?", [
+        {
+          text: "Cancle",
+          onPress: () => null,
+        },
+        {
+          text: "Yes",
+          onPress: () => {
+            BackHandler.exitApp();
+          },
+        },
+      ]);
+      return true;
+    };
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      onBackPress
+    );
+    return () => backHandler.remove();
+  }, []);
+
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
