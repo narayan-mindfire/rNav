@@ -24,7 +24,6 @@ const HomePage: FC<HomeScreenProps> = ({ navigation }) => {
   }, [navigation]);
   return (
     <View style={{ justifyContent: "center", flex: 1, alignItems: "center" }}>
-      <Text>Hey {auth?.user?.name} !!</Text>
       <Text style={{ margin: 30 }}>count : {count}</Text>
       <TouchableOpacity
         style={styles.btn}

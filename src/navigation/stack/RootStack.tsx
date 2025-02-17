@@ -18,7 +18,7 @@ const RootStack: React.FC<RootStackParamList> = () => {
           statusBarBackgroundColor: "gray",
         }}
       >
-        {!isAuthenticated?.user ? (
+        {!isAuthenticated?.token ? (
           <Stack.Screen name="Welcome" component={Welcome} />
         ) : (
           <>

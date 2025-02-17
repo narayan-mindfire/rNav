@@ -1,7 +1,7 @@
 import React, { createContext, FC, ReactNode, useState } from "react";
 
 interface AuthContextType {
-  user: { name: string } | null;
+  token: string | null;
   signIn: () => void;
   signOut: () => void;
 }
@@ -14,17 +14,17 @@ interface AuthProviderProps {
   children: ReactNode;
 }
 export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
-  const [user, setUser] = useState<{ name: string } | null>(null);
+  const [token, setToken] = useState<string | null>(null);
   const signIn = () => {
     console.log("signing in");
-    setUser({ name: "narayan" });
+    setToken("demoauthtoken");
   };
   const signOut = () => {
     console.log("signing out");
-    setUser(null);
+    setToken(null);
   };
   return (
-    <AuthContext.Provider value={{ signIn, signOut, user }}>
+    <AuthContext.Provider value={{ signIn, signOut, token }}>
       {children}
     </AuthContext.Provider>
   );

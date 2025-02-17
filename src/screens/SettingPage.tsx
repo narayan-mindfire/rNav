@@ -19,7 +19,7 @@ const SettingPage = () => {
       </TouchableOpacity>
       <Text>
         The authentication status is :{" "}
-        {auth?.user ? JSON.stringify(true) : JSON.stringify(false)}
+        {auth?.token ? JSON.stringify(true) : JSON.stringify(false)}
       </Text>
       <TouchableOpacity style={styles.btn} onPress={() => auth?.signOut()}>
         <Text style={styles.btntxt}>Signout</Text>
