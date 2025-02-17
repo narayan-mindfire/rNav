@@ -10,31 +10,34 @@ import {
 } from "react-native";
 import { HomeScreenProps } from "../types/NavigationTypes";
 import AuthContext from "../context/authContext";
+import { useFocusEffect } from "@react-navigation/native";
 const HomePage: FC<HomeScreenProps> = ({ navigation }) => {
   const [count, setCount] = useState(0);
   const auth = useContext(AuthContext);
-  useEffect(() => {
-    const onBackPress = () => {
-      Alert.alert("Exit App", "Are you sure you want to exit the app?", [
-        {
-          text: "Cancle",
-          onPress: () => null,
-        },
-        {
-          text: "Yes",
-          onPress: () => {
-            BackHandler.exitApp();
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+        Alert.alert("Exit App", "Are you sure you want to exit the app?", [
+          {
+            text: "Cancel",
+            onPress: () => null,
+            style: "cancel",
           },
-        },
-      ]);
-      return true;
-    };
-    const backHandler = BackHandler.addEventListener(
-      "hardwareBackPress",
-      onBackPress
-    );
-    return () => backHandler.remove();
-  }, []);
+          {
+            text: "Yes",
+            onPress: () => BackHandler.exitApp(),
+          },
+        ]);
+        return true;
+      };
+      const backHandler = BackHandler.addEventListener(
+        "hardwareBackPress",
+        onBackPress
+      );
+
+      return () => backHandler.remove();
+    }, [])
+  );
 
   useEffect(() => {
     navigation.setOptions({

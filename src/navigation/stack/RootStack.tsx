@@ -3,11 +3,23 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../types/NavigationTypes";
 const Stack = createNativeStackNavigator<RootStackParamList>();
 import Welcome from "../../screens/Welcome";
-import TabNavigator from "../TabNavigator";
 import ProfilePage from "../../screens/ProfilePage";
-import { NavigationContainer } from "@react-navigation/native";
+import {
+  NavigationContainer,
+  DefaultTheme,
+  DarkTheme,
+} from "@react-navigation/native";
 import DrawNav from "../Drawer";
 import { AuthContext } from "../../context/authContext";
+
+const myTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: "pink",
+    primary: "yellow",
+  },
+};
 const RootStack: React.FC<RootStackParamList> = () => {
   const isAuthenticated = useContext(AuthContext);
   return (

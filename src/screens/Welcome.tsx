@@ -9,28 +9,31 @@ import {
 import React, { useCallback, useContext, useEffect } from "react";
 import { WelcomeScreenProps } from "../types/NavigationTypes";
 import { AuthContext } from "../context/authContext";
+import { useFocusEffect } from "@react-navigation/native";
 const Welcome: React.FC<WelcomeScreenProps> = ({ navigation }) => {
   const auth = useContext(AuthContext);
-  useEffect(() => {
-    const onBackPress = () => {
-      Alert.alert("Exit App", "Are you sure you want to exit the app?", [
-        {
-          text: "Cancle",
-          onPress: () => null,
-        },
-        {
-          text: "Yes",
-          onPress: () => BackHandler.exitApp(),
-        },
-      ]);
-      return true;
-    };
-    const backHandler = BackHandler.addEventListener(
-      "hardwareBackPress",
-      onBackPress
-    );
-    return () => backHandler.remove();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      const onBackPress = () => {
+        Alert.alert("Exit App", "Are you sure you want to exit the app?", [
+          {
+            text: "Cancle",
+            onPress: () => null,
+          },
+          {
+            text: "Yes",
+            onPress: () => BackHandler.exitApp(),
+          },
+        ]);
+        return true;
+      };
+      const backHandler = BackHandler.addEventListener(
+        "hardwareBackPress",
+        onBackPress
+      );
+      return () => backHandler.remove();
+    }, [])
+  );
   return (
     <View style={styles.container}>
       <Text style={styles.headtxt}>welcome</Text>
