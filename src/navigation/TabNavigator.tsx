@@ -2,7 +2,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import RootStack from "./stack/StackNavigator";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import WorkTopTab from "./WorkTopTab";
-import SettingPage from "../screens/SettingPage";
 
 const Tab = createBottomTabNavigator();
 
@@ -18,7 +17,7 @@ const TabNavigator = () => {
         },
         tabBarStyle: {
           height: 80,
-          backgroundColor: "gray",
+          backgroundColor: "#8E6CEF",
           justifyContent: "center",
         },
         tabBarActiveTintColor: "#000",
@@ -30,11 +29,6 @@ const TabNavigator = () => {
         component={RootStack}
         options={{
           headerShown: false,
-          // tabBarBadge: 3,
-          // tabBarBadgeStyle: {
-          //   backgroundColor: "#000",
-          //   color: "#fff",
-          // },
           tabBarIcon: ({ focused }) => (
             <Icon name="home" size={30} color={focused ? "#000" : "#fff"} />
           ),

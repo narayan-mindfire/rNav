@@ -56,9 +56,9 @@ function MyDrawer() {
           borderRadius: 0,
         },
         drawerActiveTintColor: "#000",
-        drawerActiveBackgroundColor: "gray",
+        drawerActiveBackgroundColor: "#8E6CEF",
         drawerInactiveBackgroundColor: "#fff",
-        drawerInactiveTintColor: "gray",
+        drawerInactiveTintColor: "#8E6CEF",
       }}
     >
       <Drawer.Screen

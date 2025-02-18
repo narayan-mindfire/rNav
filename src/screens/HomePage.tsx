@@ -1,27 +1,31 @@
-import React, { FC, useContext, useEffect, useState } from "react";
+import SearchBar from "../components/SearchBar";
 import {
   Alert,
   BackHandler,
-  Button,
+  FlatList,
+  Image,
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
-import { HomeScreenProps } from "../types/NavigationTypes";
-import AuthContext from "../context/authContext";
-import { useFocusEffect } from "@react-navigation/native";
-const HomePage: FC<HomeScreenProps> = ({ navigation }) => {
-  const [count, setCount] = useState(0);
-  const auth = useContext(AuthContext);
+import productData from "../assets/products.json";
+import ProductCard from "../components/ProductCard";
+import { useFocusEffect, useTheme } from "@react-navigation/native";
+import { useCallback } from "react";
+
+export default function Home() {
+  const products = productData.products;
   useFocusEffect(
-    React.useCallback(() => {
+    useCallback(() => {
       const onBackPress = () => {
         Alert.alert("Exit App", "Are you sure you want to exit the app?", [
           {
-            text: "Cancel",
+            text: "Cancle",
             onPress: () => null,
-            style: "cancel",
           },
           {
             text: "Yes",
@@ -34,68 +38,226 @@ const HomePage: FC<HomeScreenProps> = ({ navigation }) => {
         "hardwareBackPress",
         onBackPress
       );
-
       return () => backHandler.remove();
     }, [])
   );
-
-  useEffect(() => {
-    navigation.setOptions({
-      headerRight: () => (
-        <TouchableOpacity
-          onPress={() => setCount((count: number) => count + 1)}
-          style={styles.btn}
-        >
-          <Text style={styles.btntxt}>Update count</Text>
-        </TouchableOpacity>
-      ),
-      headerLeft: () => (
-        <TouchableOpacity onPress={() => setCount(0)} style={styles.btn}>
-          <Text style={styles.btntxt}>reset count</Text>
-        </TouchableOpacity>
-      ),
-    });
-  }, [navigation]);
+  const { dark, colors } = useTheme();
   return (
-    <View style={{ justifyContent: "center", flex: 1, alignItems: "center" }}>
-      <Text style={{ margin: 30 }}>count : {count}</Text>
-      <TouchableOpacity
-        style={styles.btn}
-        onPress={() =>
-          navigation.navigate("Explore", {
-            message: "hello this is a message I'm passing via props",
-            times: 1,
-            headerName: "Explore",
-          })
-        }
-      >
-        <Text style={styles.btntxt}>explore</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.btn}
-        onPress={() => {
-          navigation.getParent()?.navigate("Work", { screen: "Doing" });
-        }}
-      >
-        <Text style={styles.btntxt}>doing Page</Text>
-      </TouchableOpacity>
-    </View>
+    <SafeAreaView>
+      <StatusBar
+        backgroundColor={colors.background}
+        barStyle={dark ? "light-content" : "dark-content"}
+      />
+      <ScrollView>
+        <View style={styles.container}>
+          <View style={{ width: "100%", alignItems: "center" }}>
+            <SearchBar height={40} width={342} />
+          </View>
+          <View style={styles.catBox}>
+            <View
+              style={{ flexDirection: "row", justifyContent: "space-between" }}
+            >
+              <Text style={[styles.heading, { color: colors.text }]}>
+                Categories
+              </Text>
+              <TouchableOpacity>
+                <Text
+                  style={{ fontSize: 16, paddingRight: 3, color: colors.text }}
+                >
+                  See All
+                </Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.categories}>
+              <View style={styles.category}>
+                <Image
+                  resizeMode="contain"
+                  source={require("../assets/images/hoodie.png")}
+                />
+                <Text style={[styles.cattxt, { color: colors.text }]}>
+                  Hoodies
+                </Text>
+              </View>
+              <View style={styles.category}>
+                <Image
+                  resizeMode="contain"
+                  source={require("../assets/images/Shorts.png")}
+                />
+                <Text style={[styles.cattxt, { color: colors.text }]}>
+                  Shorts
+                </Text>
+              </View>
+              <View style={styles.category}>
+                <Image
+                  resizeMode="contain"
+                  source={require("../assets/images/Shoes.png")}
+                />
+                <Text style={[styles.cattxt, { color: colors.text }]}>
+                  Shoes
+                </Text>
+              </View>
+              <View style={styles.category}>
+                <Image
+                  resizeMode="contain"
+                  source={require("../assets/images/Bags.png")}
+                />
+                <Text style={[styles.cattxt, { color: colors.text }]}>Bag</Text>
+              </View>
+              <View style={styles.category}>
+                <Image
+                  resizeMode="contain"
+                  source={require("../assets/images/Accessories.png")}
+                />
+                <Text style={[styles.cattxt, { color: colors.text }]}>
+                  Accessories
+                </Text>
+              </View>
+            </View>
+          </View>
+          <View style={styles.topList}>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 24,
+              }}
+            >
+              <Text style={[styles.heading, { color: colors.text }]}>
+                Top Selling
+              </Text>
+              <TouchableOpacity>
+                <Text
+                  style={{ fontSize: 16, paddingRight: 3, color: colors.text }}
+                >
+                  See All
+                </Text>
+              </TouchableOpacity>
+            </View>
+            <FlatList
+              data={products.slice(10, 20)}
+              horizontal={true}
+              renderItem={({ item }) => (
+                <ProductCard
+                  name={item.title ? item.title : "default"}
+                  price={item.price ? item.price : 0}
+                  image={
+                    item.images
+                      ? item.images[0]
+                      : "https://assets.dummyjson.com/public/qr-code.png"
+                  }
+                />
+              )}
+              ItemSeparatorComponent={() => {
+                return (
+                  <View
+                    style={{
+                      height: "100%",
+                      width: 10,
+                    }}
+                  />
+                );
+              }}
+            />
+          </View>
+          <View style={[styles.newList, { marginBottom: 15 }]}>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 24,
+              }}
+            >
+              <Text style={[styles.heading, { color: colors.primary }]}>
+                New In
+              </Text>
+              <TouchableOpacity>
+                <Text
+                  style={{ fontSize: 16, paddingRight: 3, color: colors.text }}
+                >
+                  See All
+                </Text>
+              </TouchableOpacity>
+            </View>
+            <FlatList
+              nestedScrollEnabled={true}
+              data={products.slice(20, 28)}
+              horizontal={true}
+              renderItem={({ item }) => (
+                <ProductCard
+                  name={item.title ? item.title : "default"}
+                  price={item.price ? item.price : 0}
+                  image={
+                    item.images
+                      ? item.images[0]
+                      : "https://assets.dummyjson.com/public/qr-code.png"
+                  }
+                />
+              )}
+              ItemSeparatorComponent={() => {
+                return (
+                  <View
+                    style={{
+                      height: "100%",
+                      width: 10,
+                    }}
+                  />
+                );
+              }}
+            />
+          </View>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
-};
+}
 
 const styles = StyleSheet.create({
-  btn: {
-    height: 40,
-    width: 100,
-    borderRadius: 20,
-    backgroundColor: "gray",
+  container: {
+    paddingTop: 13,
     justifyContent: "center",
-    alignItems: "center",
-    marginTop: 20,
+    marginBottom: 35,
   },
-  btntxt: {
-    color: "#fff",
-    fontWeight: "bold",
+  catBox: {
+    paddingHorizontal: 24,
+    marginTop: 24,
+    height: 116,
+    width: "100%",
+  },
+  heading: {
+    fontWeight: "700",
+    fontSize: 16,
+    marginBottom: 10,
+  },
+  categories: {
+    top: 13,
+    width: "100%",
+    height: 80,
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  category: {
+    width: 56,
+    height: 80,
+    // borderColor : 'black',
+    // borderWidth : 3,
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  cattxt: {
+    fontSize: 12,
+    lineHeight: 19.2,
+    fontWeight: "300",
+  },
+  topList: {
+    height: 282,
+    width: "100%",
+    paddingHorizontal: 24,
+    // borderColor : 'black',
+    // borderWidth : 3,
+  },
+  newList: {
+    paddingHorizontal: 24,
+    width: "100%",
+    height: 300,
   },
 });
-export default HomePage;

@@ -2,10 +2,12 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { AuthContext } from "../context/authContext";
+import themeContext from "../context/themeContext";
 
 const SettingPage = () => {
   const navigation = useNavigation();
   const auth = useContext(AuthContext);
+  const theme = useContext(themeContext);
   return (
     <View style={styles.container}>
       <Text>SettingPage</Text>
@@ -24,6 +26,14 @@ const SettingPage = () => {
       <TouchableOpacity style={styles.btn} onPress={() => auth?.signOut()}>
         <Text style={styles.btntxt}>Signout</Text>
       </TouchableOpacity>
+      <TouchableOpacity
+        style={[styles.btn, { width: 300 }]}
+        onPress={() => theme?.toggleTheme()}
+      >
+        <Text style={styles.btntxt}>
+          change to :{theme?.dark ? " LIGHT MODE" : " DARK MODE"}
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -41,7 +51,7 @@ const styles = StyleSheet.create({
     height: 40,
     width: 100,
     borderRadius: 20,
-    backgroundColor: "gray",
+    backgroundColor: "#8E6CEF",
     justifyContent: "center",
     alignItems: "center",
     marginTop: 20,

@@ -13,7 +13,7 @@ function WorkTopTab() {
         },
         tabBarStyle: {
           height: 100,
-          backgroundColor: "gray",
+          backgroundColor: "#8E6CEF",
           justifyContent: "center",
         },
         tabBarActiveTintColor: "#000",

@@ -5,6 +5,7 @@ import HomePage from "../../screens/HomePage";
 import Explore from "../../screens/ExplorePage";
 import { StackNavigatorParamList } from "../../types/NavigationTypes";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import { HeaderShownContext } from "@react-navigation/elements";
 const Stack = createNativeStackNavigator<StackNavigatorParamList>();
 
 function StackNavigator() {
@@ -12,12 +13,16 @@ function StackNavigator() {
     <Stack.Navigator
       screenOptions={{
         headerTitleAlign: "center",
-        headerStyle: { backgroundColor: "gray" },
+        headerStyle: { backgroundColor: "#8E6CEF" },
         headerTitleStyle: { fontWeight: "bold", color: "#fff" },
-        statusBarBackgroundColor: "gray",
+        statusBarBackgroundColor: "#8E6CEF",
       }}
     >
-      <Stack.Screen name="HomePage" component={HomePage} />
+      <Stack.Screen
+        name="HomePage"
+        component={HomePage}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen
         name="Explore"
         component={Explore}
