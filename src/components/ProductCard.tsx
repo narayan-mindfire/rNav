@@ -12,7 +12,10 @@ export default function ProductCard({ name, price, image }: ProductCardProps) {
   return (
     <View style={[styles.wrapper, { backgroundColor: colors.card }]}>
       <TouchableOpacity style={styles.fav}>
-        <Image source={require("../assets/icons/fav-icon.png")} />
+        <Image
+          tintColor={colors.text}
+          source={require("../assets/icons/fav-icon.png")}
+        />
       </TouchableOpacity>
       <View style={[styles.cardContainer]}>
         <Image
@@ -53,7 +56,6 @@ const styles = StyleSheet.create({
   imgStyle: {
     width: "100%",
     height: 190,
-    // backgroundColor: "#fff",
   },
   productName: {
     // color: "#272727",

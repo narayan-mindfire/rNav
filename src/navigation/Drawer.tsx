@@ -12,7 +12,6 @@ import { Linking } from "react-native";
 import { useContext } from "react";
 import AuthContext from "../context/authContext";
 import { useTheme } from "@react-navigation/native";
-import { Colors } from "react-native/Libraries/NewAppScreen";
 
 const Drawer = createDrawerNavigator();
 
@@ -61,8 +60,7 @@ function MyDrawer() {
           borderRadius: 10,
         },
         drawerActiveTintColor: colors.primary,
-        // drawerActiveBackgroundColor: "#8E6CEF",
-        drawerInactiveTintColor: dark ? "#000" : "#fff",
+        drawerInactiveTintColor: colors.text,
       }}
     >
       <Drawer.Screen

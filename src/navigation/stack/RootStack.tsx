@@ -14,12 +14,12 @@ import {
 import DrawNav from "../Drawer";
 import { AuthContext } from "../../context/authContext";
 import { ThemeContext } from "../../context/themeContext";
+import { useColorScheme } from "react-native";
 
 const RootStack: React.FC<RootStackParamList> = () => {
   const auth = useContext(AuthContext);
-  // const  = useContext(ThemeContext);
-  // console.log(dark.);
   const theme = useContext(ThemeContext);
+  const deviceTheme = useColorScheme();
   return (
     <NavigationContainer theme={theme?.dark ? darkT : lightT}>
       <Stack.Navigator

@@ -1,4 +1,10 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  useColorScheme,
+  View,
+} from "react-native";
 import React, { useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { AuthContext } from "../context/authContext";
@@ -8,6 +14,15 @@ const SettingPage = () => {
   const navigation = useNavigation();
   const auth = useContext(AuthContext);
   const theme = useContext(themeContext);
+  const deviceTheme = useColorScheme();
+  const handleSystemTheme = () => {
+    if (
+      (deviceTheme === "dark" && theme?.dark) ||
+      (!(deviceTheme === "dark") && !theme?.dark)
+    )
+      return;
+    else theme?.toggleTheme();
+  };
   return (
     <View style={styles.container}>
       <Text>SettingPage</Text>
@@ -33,6 +48,12 @@ const SettingPage = () => {
         <Text style={styles.btntxt}>
           change to :{theme?.dark ? " LIGHT MODE" : " DARK MODE"}
         </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={[styles.btn, { width: 300 }]}
+        onPress={() => handleSystemTheme()}
+      >
+        <Text style={styles.btntxt}>use system theme</Text>
       </TouchableOpacity>
     </View>
   );
