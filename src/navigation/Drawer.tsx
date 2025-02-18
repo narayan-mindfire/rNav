@@ -11,11 +11,14 @@ import SettingPage from "../screens/SettingPage";
 import { Linking } from "react-native";
 import { useContext } from "react";
 import AuthContext from "../context/authContext";
+import { useTheme } from "@react-navigation/native";
+import { Colors } from "react-native/Libraries/NewAppScreen";
 
 const Drawer = createDrawerNavigator();
 
 function CustomDrawerContent(props: DrawerContentComponentProps) {
   const auth = useContext(AuthContext);
+  const { colors } = useTheme();
   return (
     <View style={styles.container}>
       <DrawerContentScrollView
@@ -27,14 +30,15 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
         </View>
         <View style={styles.grpb}>
           <DrawerItem
-            style={{ backgroundColor: "white", borderRadius: 0 }}
+            style={{ backgroundColor: colors.card, borderRadius: 20 }}
             label="LogOut"
             labelStyle={{ color: "red", fontWeight: "bold" }}
             onPress={() => auth?.signOut()}
           />
           <DrawerItem
             label="Help"
-            style={{ backgroundColor: "white", borderRadius: 0 }}
+            labelStyle={{ color: colors.text }}
+            style={{ backgroundColor: colors.card, borderRadius: 20 }}
             onPress={() => Linking.openURL("https://google.co.in")}
           />
         </View>
@@ -44,21 +48,21 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
 }
 
 function MyDrawer() {
+  const { dark, colors } = useTheme();
   return (
     <Drawer.Navigator
       drawerContent={(props) => <CustomDrawerContent {...props} />}
       screenOptions={{
         drawerStyle: {
-          backgroundColor: "#000",
+          backgroundColor: colors.primary,
         },
         drawerItemStyle: {
-          backgroundColor: "#fff",
-          borderRadius: 0,
+          backgroundColor: colors.card,
+          borderRadius: 10,
         },
-        drawerActiveTintColor: "#000",
-        drawerActiveBackgroundColor: "#8E6CEF",
-        drawerInactiveBackgroundColor: "#fff",
-        drawerInactiveTintColor: "#8E6CEF",
+        drawerActiveTintColor: colors.primary,
+        // drawerActiveBackgroundColor: "#8E6CEF",
+        drawerInactiveTintColor: dark ? "#000" : "#fff",
       }}
     >
       <Drawer.Screen
