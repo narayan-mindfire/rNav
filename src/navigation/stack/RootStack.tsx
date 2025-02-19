@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../types/NavigationTypes";
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -6,11 +6,7 @@ import Welcome from "../../screens/Welcome";
 import ProfilePage from "../../screens/ProfilePage";
 import darkT from "../../themes/dark";
 import lightT from "../../themes/light";
-import {
-  NavigationContainer,
-  DefaultTheme,
-  useTheme,
-} from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import DrawNav from "../Drawer";
 import { AuthContext } from "../../context/authContext";
 import { ThemeContext } from "../../context/themeContext";
@@ -19,9 +15,19 @@ import { useColorScheme } from "react-native";
 const RootStack: React.FC<RootStackParamList> = () => {
   const auth = useContext(AuthContext);
   const theme = useContext(ThemeContext);
-  const deviceTheme = useColorScheme();
+  const systemTheme = useColorScheme();
   return (
-    <NavigationContainer theme={theme?.dark ? darkT : lightT}>
+    <NavigationContainer
+      theme={
+        theme?.useSystem
+          ? systemTheme === "dark"
+            ? darkT
+            : lightT
+          : theme?.dark
+          ? darkT
+          : lightT
+      }
+    >
       <Stack.Navigator
         screenOptions={{
           headerShown: false,

@@ -5,7 +5,6 @@ import HomePage from "../../screens/HomePage";
 import Explore from "../../screens/ExplorePage";
 import { StackNavigatorParamList } from "../../types/NavigationTypes";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import { HeaderShownContext } from "@react-navigation/elements";
 const Stack = createNativeStackNavigator<StackNavigatorParamList>();
 
 function StackNavigator() {
