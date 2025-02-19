@@ -4,30 +4,17 @@ import { RootStackParamList } from "../../types/NavigationTypes";
 const Stack = createNativeStackNavigator<RootStackParamList>();
 import Welcome from "../../screens/Welcome";
 import ProfilePage from "../../screens/ProfilePage";
-import darkT from "../../themes/dark";
-import lightT from "../../themes/light";
 import { NavigationContainer } from "@react-navigation/native";
 import DrawNav from "../Drawer";
 import { AuthContext } from "../../context/authContext";
 import { ThemeContext } from "../../context/themeContext";
-import { useColorScheme } from "react-native";
 
 const RootStack: React.FC<RootStackParamList> = () => {
   const auth = useContext(AuthContext);
   const theme = useContext(ThemeContext);
-  const systemTheme = useColorScheme();
+
   return (
-    <NavigationContainer
-      theme={
-        theme?.useSystem
-          ? systemTheme === "dark"
-            ? darkT
-            : lightT
-          : theme?.dark
-          ? darkT
-          : lightT
-      }
-    >
+    <NavigationContainer theme={theme?.appTheme}>
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
